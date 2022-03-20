@@ -1,14 +1,11 @@
 import React from 'react';
 import './App.css';
-import {InputForm} from "./InputForm";
+import {InputFormHooks} from "./InputFormHooks";
 
 function App() {
     return (
         <div className="App">
-            <InputForm title="Use Hooks" onChange={() => {
-            }}/>
-            <InputForm title="Use setState" onChange={() => {
-            }}/>
+            <InputFormHooks title="Use Hooks" />
         </div>
     );
 }
