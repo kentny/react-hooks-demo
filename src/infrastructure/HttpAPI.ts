@@ -11,6 +11,8 @@ export class HttpAPIInfrastructure implements  HttpAPI {
     }
 
     get(path: string): Promise<object> {
-        return Promise.resolve({});
+        return fetch(this.url + path).then(response => {
+            return response.json()
+        })
     }
 }
