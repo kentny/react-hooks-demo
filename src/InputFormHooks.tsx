@@ -31,7 +31,7 @@ export function InputFormHooks(props: { title: string, repo: DataRepository }) {
             <label>
                 <input type="radio" name="radio-buttons" value="albums" onChange={() => {
                     setSelectedValue("albums")
-                }} checked/>
+                }} defaultChecked/>
                 ALBUMS
             </label>
             <label>
@@ -42,7 +42,7 @@ export function InputFormHooks(props: { title: string, repo: DataRepository }) {
             </label>
             <label>
                 <input type="radio" name="radio-buttons" value="users" onChange={() => {
-                    // setSelectedValue("users")
+                    setSelectedValue("users")
                 }}/>
                 USERS
             </label>
