@@ -1,7 +1,11 @@
 import React, {useState} from "react";
 import {DataRepository} from "./repository/DataRepository";
 
-export function InputFormHooks(props: { title: string, repo: DataRepository, onReceiveData: (data: object[]) => void}) {
+export type DataType = {
+    [key: string]: any
+}
+
+export function InputFormHooks(props: { title: string, repo: DataRepository, onReceiveData: (data: DataType[]) => void}) {
     const {title, repo, onReceiveData} = props
     const [selectedValue, setSelectedValue] = useState<string>("albums")
 
@@ -15,11 +19,6 @@ export function InputFormHooks(props: { title: string, repo: DataRepository, onR
             case "todos":
                 repo.todos().then(todos => {
                     onReceiveData(todos)
-                })
-                break
-            case "users":
-                repo.users().then(users => {
-                    onReceiveData(users)
                 })
                 break
             default:
@@ -45,12 +44,6 @@ export function InputFormHooks(props: { title: string, repo: DataRepository, onR
                     setSelectedValue("todos")
                 }}/>
                 TODOS
-            </label>
-            <label>
-                <input type="radio" name="radio-buttons" value="users" onChange={() => {
-                    setSelectedValue("users")
-                }}/>
-                USERS
             </label>
             <button type='submit' onClick={() => {
                 getData()

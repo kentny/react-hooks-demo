@@ -3,7 +3,6 @@ import {HttpAPI} from "../infrastructure/HttpAPI";
 import {HttpAPIDataRepository} from "./DataRepository";
 import {Album} from "../entity/Album";
 import {Todo} from "../entity/Todo";
-import {User} from "../entity/User";
 
 describe('Check DataRepository.', () => {
     let spyHttpAPI: SpyHttpAPI
@@ -20,9 +19,6 @@ describe('Check DataRepository.', () => {
 
         httpAPIDataRepository.todos()
         expect(spyHttpAPI.inputValue_getPath).toEqual("/todos")
-
-        httpAPIDataRepository.users()
-        expect(spyHttpAPI.inputValue_getPath).toEqual("/users")
     })
 
     test('Receive and pass proper data', async () => {
@@ -41,14 +37,6 @@ describe('Check DataRepository.', () => {
         spyHttpAPI.returnValue_get = expectedTodos
         const actualTodos = await httpAPIDataRepository.todos()
         expect(actualTodos).toEqual(expectedTodos)
-
-        const expectedUsers: User[] = [
-            {id: "A", name: "Bob", email: "bob@example.com"},
-            {id: "B", name: "Kenny", email: "kenny@example.com"},
-        ]
-        spyHttpAPI.returnValue_get = expectedUsers
-        const actualUsers = await httpAPIDataRepository.users()
-        expect(actualUsers).toEqual(expectedUsers)
     })
 })
 

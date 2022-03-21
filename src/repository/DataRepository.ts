@@ -1,12 +1,10 @@
 import {Album} from "../entity/Album";
 import {Todo} from "../entity/Todo";
-import {User} from "../entity/User";
 import {HttpAPI} from "../infrastructure/HttpAPI";
 
 export interface DataRepository {
     albums(): Promise<Album[]>
     todos(): Promise<Todo[]>
-    users(): Promise<User[]>
 }
 
 export class HttpAPIDataRepository implements DataRepository {
@@ -27,11 +25,4 @@ export class HttpAPIDataRepository implements DataRepository {
             return obj as Todo[]
         })
     }
-
-    users(): Promise<User[]> {
-        return this.httpAPI.get("/users").then(obj => {
-            return obj as User[]
-        })
-    }
-
 }
