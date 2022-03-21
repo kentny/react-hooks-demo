@@ -1,20 +1,26 @@
 import React, {useState} from "react";
 import {DataRepository} from "./repository/DataRepository";
 
-export function InputFormHooks(props: { title: string, repo: DataRepository }) {
-    const {title, repo} = props
+export function InputFormHooks(props: { title: string, repo: DataRepository, onReceiveData: (data: object[]) => void}) {
+    const {title, repo, onReceiveData} = props
     const [selectedValue, setSelectedValue] = useState<string>("albums")
 
     const getData = () => {
         switch (selectedValue) {
             case "albums":
-                repo.albums()
+                repo.albums().then(albums => {
+                    onReceiveData(albums)
+                })
                 break
             case "todos":
-                repo.todos()
+                repo.todos().then(todos => {
+                    onReceiveData(todos)
+                })
                 break
             case "users":
-                repo.users()
+                repo.users().then(users => {
+                    onReceiveData(users)
+                })
                 break
             default:
                 break
