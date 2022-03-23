@@ -3,6 +3,7 @@ import './App.css';
 import {DataType, InputFormHooks} from "./InputFormHooks";
 import {HttpAPIInfrastructure} from "./infrastructure/HttpAPI";
 import {HttpAPIDataRepository} from "./repository/DataRepository";
+import {InputFormSetState} from "./InputFormSetState";
 
 function App() {
     const [data, setData] = useState<DataType[]>([])
@@ -15,7 +16,8 @@ function App() {
 
     return (
         <div className="App">
-            <InputFormHooks title="Use Hooks" repo={repo} onReceiveData={onReceiveData}/>
+            <InputFormHooks {...{title: "Use Hooks", repo: repo, onReceiveData: onReceiveData}}/>
+            <InputFormSetState {...{title: "Use setState", repo: repo, onReceiveData: onReceiveData}}/>
             <table>
                 <thead>
                 <tr>

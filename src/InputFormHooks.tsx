@@ -5,7 +5,13 @@ export type DataType = {
     [key: string]: any
 }
 
-export function InputFormHooks(props: { title: string, repo: DataRepository, onReceiveData: (data: DataType[]) => void}) {
+export type InputFormProps = {
+    title: string,
+    repo: DataRepository,
+    onReceiveData: (data: DataType[]) => void
+}
+
+export function InputFormHooks(props: InputFormProps) {
     const {title, repo, onReceiveData} = props
     const [selectedValue, setSelectedValue] = useState<string>("albums")
 
