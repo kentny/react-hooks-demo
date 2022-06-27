@@ -11,7 +11,7 @@ export type InputFormProps = {
     onReceiveData: (data: DataType[]) => void
 }
 
-export function InputFormHooks(props: InputFormProps) {
+export function TypeSelectorForm(props: InputFormProps) {
     const {title, repo, onReceiveData} = props
     const [selectedValue, setSelectedValue] = useState<string>("albums")
 

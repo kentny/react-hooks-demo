@@ -1,5 +1,5 @@
 import {fireEvent, render} from "@testing-library/react";
-import {InputFormHooks} from "./InputFormHooks";
+import {TypeSelectorForm} from "./TypeSelectorForm";
 import React from "react";
 import {DataRepository} from "./repository/DataRepository";
 import {Todo} from "./entity/Todo";
@@ -12,8 +12,8 @@ describe('Check input form.', () => {
         spyDataRepository = new SpyDataRepository()
     })
 
-    test('There are 3 radio buttons and 1 get button in input form.', () => {
-        const view = render(<InputFormHooks title="DUMMY TITLE" repo={spyDataRepository} onReceiveData={() => {}} />)
+    test('There are 2 radio buttons and 1 get button in input form.', () => {
+        const view = render(<TypeSelectorForm title="DUMMY TITLE" repo={spyDataRepository} onReceiveData={() => {}} />)
         // eslint-disable-next-line testing-library/prefer-screen-queries
         const radioForAlbums = view.getByLabelText('ALBUMS') as HTMLInputElement
         // eslint-disable-next-line testing-library/prefer-screen-queries
@@ -29,7 +29,7 @@ describe('Check input form.', () => {
     })
 
     test('Call get albums api.', () => {
-        const view = render(<InputFormHooks title="DUMMY TITLE" repo={spyDataRepository} onReceiveData={() => {}} />)
+        const view = render(<TypeSelectorForm title="DUMMY TITLE" repo={spyDataRepository} onReceiveData={() => {}} />)
         // eslint-disable-next-line testing-library/prefer-screen-queries
         const radioForAlbums = view.getByLabelText('ALBUMS') as HTMLInputElement
         // eslint-disable-next-line testing-library/prefer-screen-queries
@@ -53,7 +53,7 @@ describe('Check input form.', () => {
             {id: "A", title: "ABC", completed: true},
             {id: "B", title: "123", completed: false},
         ]
-        const view = render(<InputFormHooks title="DUMMY TITLE" repo={spyDataRepository} onReceiveData={(data => {
+        const view = render(<TypeSelectorForm title="DUMMY TITLE" repo={spyDataRepository} onReceiveData={(data => {
             try {
                 expect(expectedTodos).toEqual(data)
                 done()
