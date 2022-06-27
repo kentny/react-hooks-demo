@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {DataRepository} from "./repository/DataRepository";
+import {Album} from "./entity/Album";
+import {Todo} from "./entity/Todo";
 
-export type DataType = {
-    [key: string]: any
-}
+export type DataType = Album | Todo
 
 export type InputFormProps = {
     title: string,
@@ -19,6 +19,7 @@ export function TypeSelectorForm(props: InputFormProps) {
         switch (selectedValue) {
             case "albums":
                 repo.albums().then(albums => {
+                    console.log(albums)
                     onReceiveData(albums)
                 })
                 break

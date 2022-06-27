@@ -16,13 +16,23 @@ export class HttpAPIDataRepository implements DataRepository {
 
     albums(): Promise<Album[]> {
         return this.httpAPI.get("/albums").then(obj => {
-            return obj as Album[]
+            return (obj as any[]).map(album => {
+                return {
+                    ...album,
+                    kind: "album",
+                }
+            })
         })
     }
 
     todos(): Promise<Todo[]> {
         return this.httpAPI.get("/todos").then(obj => {
-            return obj as Todo[]
+            return (obj as any[]).map(todo => {
+                return {
+                    ...todo,
+                    kind: "todo",
+                }
+            })
         })
     }
 }

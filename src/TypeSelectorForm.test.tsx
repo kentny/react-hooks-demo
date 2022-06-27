@@ -50,8 +50,8 @@ describe('Check input form.', () => {
 
     test('Receive expected data through onReceiveData.', (done) => {
         const expectedTodos: Todo[] = [
-            {id: "A", title: "ABC", completed: true},
-            {id: "B", title: "123", completed: false},
+            {kind: "todo", userId: "1", id: "A", title: "ABC", completed: true},
+            {kind: "todo", userId: "1", id: "B", title: "123", completed: false},
         ]
         const view = render(<TypeSelectorForm title="DUMMY TITLE" repo={spyDataRepository} onReceiveData={(data => {
             try {

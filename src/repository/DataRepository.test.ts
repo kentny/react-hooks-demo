@@ -23,16 +23,16 @@ describe('Check DataRepository.', () => {
 
     test('Receive and pass proper data', async () => {
         const expectedAlbums: Album[] = [
-            {id: "A", title: "ABC"},
-            {id: "B", title: "123"},
+            {kind: 'album', userId: "1", id: "A", title: "ABC"},
+            {kind: 'album', userId: "1", id: "B", title: "123"},
         ]
         spyHttpAPI.returnValue_get = expectedAlbums
         const actualAlbums = await httpAPIDataRepository.albums()
         expect(actualAlbums).toEqual(expectedAlbums)
 
         const expectedTodos: Todo[] = [
-            {id: "A", title: "ABC", completed: true},
-            {id: "B", title: "123", completed: false},
+            {kind: 'todo', userId: "1", id: "A", title: "ABC", completed: true},
+            {kind: 'todo', userId: "1", id: "B", title: "123", completed: false},
         ]
         spyHttpAPI.returnValue_get = expectedTodos
         const actualTodos = await httpAPIDataRepository.todos()
