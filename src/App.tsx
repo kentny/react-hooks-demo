@@ -1,30 +1,26 @@
 import React, {useState} from 'react';
 import './App.css';
-import {DataType, TypeSelectorForm} from "./TypeSelectorForm";
+import {DataChunk, TypeSelectorForm} from "./TypeSelectorForm";
 import {HttpAPIInfrastructure} from "./infrastructure/HttpAPI";
 import {HttpAPIDataRepository} from "./repository/DataRepository";
 import {Album} from "./entity/Album";
 import {Todo} from "./entity/Todo";
 
 function App() {
-    const [data, setData] = useState<DataType[]>([])
+    const [dataChunk, setDataChunk] = useState<DataChunk>()
     const httpAPI = new HttpAPIInfrastructure("https://jsonplaceholder.typicode.com")
     const repo = new HttpAPIDataRepository(httpAPI)
 
-    const onReceiveData = (data: DataType[]) => {
-        console.log(data)
-        setData(data)
+    const onReceiveData = (dataChunk: DataChunk) => {
+        setDataChunk(dataChunk)
     }
 
     const createHeader =  () => {
-        console.log(data)
-
-        if (data.length == 0) {
+        if (dataChunk === undefined || dataChunk.data.length == 0) {
             return <></>
         }
-        console.log(`data[0].kind: ${data[0].kind}`)
 
-        if (data[0].kind == 'album') {
+        if (dataChunk.type == 'album') {
             return <>
                 <th>ID</th>
                 <th>UserID</th>
@@ -32,7 +28,7 @@ function App() {
             </>
         }
 
-        if (data[0].kind == 'todo') {
+        if (dataChunk.type == 'todo') {
             return <>
                 <th>ID</th>
                 <th>UserID</th>
@@ -44,12 +40,12 @@ function App() {
     }
 
     const createBody = () => {
-        if (data.length == 0) {
+        if (dataChunk === undefined || dataChunk.data.length == 0) {
             return <></>
         }
 
-        if (data[0].kind == 'album') {
-            return data.map((_data, index) => {
+        if (dataChunk.type == 'album') {
+            return dataChunk.data.map((_data, index) => {
                 const album = _data as Album
                 return <tr key={index}>
                     <td>{album.id}</td>
@@ -59,8 +55,8 @@ function App() {
             })
         }
 
-        if (data[0].kind == 'todo') {
-            return data.map((_data, index) => {
+        if (dataChunk.type == 'todo') {
+            return dataChunk.data.map((_data, index) => {
                 const todo = _data as Todo
                 return <tr key={index}>
                     <td>{todo.id}</td>
@@ -84,7 +80,7 @@ function App() {
                 </tr>
                 </thead>
                 <tbody>
-                {createBody()}
+                    {createBody()}
                 </tbody>
             </table>
         </div>

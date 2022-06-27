@@ -1,6 +1,7 @@
 import {Album} from "../entity/Album";
 import {Todo} from "../entity/Todo";
 import {HttpAPI} from "../infrastructure/HttpAPI";
+import React from "react";
 
 export interface DataRepository {
     albums(): Promise<Album[]>
@@ -15,24 +16,10 @@ export class HttpAPIDataRepository implements DataRepository {
     }
 
     albums(): Promise<Album[]> {
-        return this.httpAPI.get("/albums").then(obj => {
-            return (obj as any[]).map(album => {
-                return {
-                    ...album,
-                    kind: "album",
-                }
-            })
-        })
+        return this.httpAPI.get<Album[]>("/albums")
     }
 
     todos(): Promise<Todo[]> {
-        return this.httpAPI.get("/todos").then(obj => {
-            return (obj as any[]).map(todo => {
-                return {
-                    ...todo,
-                    kind: "todo",
-                }
-            })
-        })
+        return this.httpAPI.get<Todo[]>("/todos")
     }
 }

@@ -23,16 +23,16 @@ describe('Check DataRepository.', () => {
 
     test('Receive and pass proper data', async () => {
         const expectedAlbums: Album[] = [
-            {kind: 'album', userId: "1", id: "A", title: "ABC"},
-            {kind: 'album', userId: "1", id: "B", title: "123"},
+            {userId: "1", id: "A", title: "ABC"},
+            {userId: "1", id: "B", title: "123"},
         ]
         spyHttpAPI.returnValue_get = expectedAlbums
         const actualAlbums = await httpAPIDataRepository.albums()
         expect(actualAlbums).toEqual(expectedAlbums)
 
         const expectedTodos: Todo[] = [
-            {kind: 'todo', userId: "1", id: "A", title: "ABC", completed: true},
-            {kind: 'todo', userId: "1", id: "B", title: "123", completed: false},
+            {userId: "1", id: "A", title: "ABC", completed: true},
+            {userId: "1", id: "B", title: "123", completed: false},
         ]
         spyHttpAPI.returnValue_get = expectedTodos
         const actualTodos = await httpAPIDataRepository.todos()
@@ -42,9 +42,9 @@ describe('Check DataRepository.', () => {
 
 class SpyHttpAPI implements HttpAPI {
     inputValue_getPath: string = ""
-    returnValue_get: object = {}
+    returnValue_get: any = {}
 
-    get(path: string): Promise<object> {
+    get<T>(path: string): Promise<T> {
         this.inputValue_getPath = path
         return Promise.resolve(this.returnValue_get);
     }

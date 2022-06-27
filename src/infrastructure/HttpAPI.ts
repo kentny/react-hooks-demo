@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export interface HttpAPI {
-    get(path: string): Promise<object>
+    get<T>(path: string): Promise<T>
 }
 
 export class HttpAPIInfrastructure implements  HttpAPI {
@@ -11,8 +11,8 @@ export class HttpAPIInfrastructure implements  HttpAPI {
         this.url = url
     }
 
-    get(path: string): Promise<object> {
-        return axios.get(this.url + path).then(response => {
+    get<T>(path: string): Promise<T> {
+        return axios.get<T>(this.url + path).then(response => {
             return response.data
         })
     }

@@ -3,12 +3,15 @@ import {DataRepository} from "./repository/DataRepository";
 import {Album} from "./entity/Album";
 import {Todo} from "./entity/Todo";
 
-export type DataType = Album | Todo
+export type DataChunk = {
+    type: 'album' | 'todo',
+    data: Album[] | Todo[]
+}
 
 export type InputFormProps = {
     title: string,
     repo: DataRepository,
-    onReceiveData: (data: DataType[]) => void
+    onReceiveData: (data: DataChunk) => void
 }
 
 export function TypeSelectorForm(props: InputFormProps) {
@@ -19,13 +22,18 @@ export function TypeSelectorForm(props: InputFormProps) {
         switch (selectedValue) {
             case "albums":
                 repo.albums().then(albums => {
-                    console.log(albums)
-                    onReceiveData(albums)
+                    onReceiveData({
+                        type: 'album',
+                        data: albums,
+                    })
                 })
                 break
             case "todos":
                 repo.todos().then(todos => {
-                    onReceiveData(todos)
+                    onReceiveData({
+                        type: 'todo',
+                        data: todos,
+                    })
                 })
                 break
             default:
