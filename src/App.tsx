@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
 import './App.css';
 import {DataChunk, TypeSelectorForm} from "./TypeSelectorForm";
-import {HttpAPIInfrastructure} from "./infrastructure/HttpAPI";
-import {HttpAPIDataRepository} from "./repository/DataRepository";
+import {HttpAPI, HttpAPIInfrastructure} from "./infrastructure/HttpAPI";
+import {DataRepository, HttpAPIDataRepository} from "./repository/DataRepository";
 import {Album} from "./entity/Album";
 import {Todo} from "./entity/Todo";
 
-function App() {
+type AppProps = {
+    dataRepository?: DataRepository
+}
+
+function App(appProps: AppProps) {
     const [dataChunk, setDataChunk] = useState<DataChunk>()
-    const httpAPI = new HttpAPIInfrastructure("https://jsonplaceholder.typicode.com")
-    const repo = new HttpAPIDataRepository(httpAPI)
 
     const onReceiveData = (dataChunk: DataChunk) => {
         setDataChunk(dataChunk)
@@ -72,7 +74,11 @@ function App() {
 
     return (
         <div className="App">
-            <TypeSelectorForm {...{title: "GET DATA", repo: repo, onReceiveData: onReceiveData}}/>
+            {appProps.dataRepository !== undefined &&
+                <TypeSelectorForm
+                    {...{title: "GET DATA", repo: appProps.dataRepository, onReceiveData: onReceiveData}}
+                />
+            }
             <table>
                 <thead>
                 <tr>

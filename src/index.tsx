@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {HttpAPIInfrastructure} from "./infrastructure/HttpAPI";
+import {HttpAPIDataRepository} from "./repository/DataRepository";
+
+const httpAPI = new HttpAPIInfrastructure("https://jsonplaceholder.typicode.com")
+const dataRepository = new HttpAPIDataRepository(httpAPI)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App dataRepository={dataRepository} />
   </React.StrictMode>,
   document.getElementById('root')
 );
