@@ -15,35 +15,12 @@ export type InputFormProps = {
 }
 
 export function TypeSelectorForm(props: InputFormProps) {
-    const {title, repo, onReceiveData} = props
     const [selectedValue, setSelectedValue] = useState<string>("albums")
 
-    const getData = () => {
-        switch (selectedValue) {
-            case "albums":
-                repo.albums().then(albums => {
-                    onReceiveData({
-                        type: 'album',
-                        data: albums,
-                    })
-                })
-                break
-            case "todos":
-                repo.todos().then(todos => {
-                    onReceiveData({
-                        type: 'todo',
-                        data: todos,
-                    })
-                })
-                break
-            default:
-                break
-        }
-    }
-
+    // TODO: Not Implemented Yet
     return <>
         <h2>
-            {title}
+            DUMMY TITLE
         </h2>
         <form onSubmit={(e) => {
             e.preventDefault()
@@ -52,16 +29,15 @@ export function TypeSelectorForm(props: InputFormProps) {
                 <input type="radio" name="radio-buttons" value="albums" onChange={() => {
                     setSelectedValue("albums")
                 }} defaultChecked/>
-                ALBUMS
+                XXX
             </label>
             <label>
                 <input type="radio" name="radio-buttons" value="todos" onChange={() => {
                     setSelectedValue("todos")
                 }}/>
-                TODOS
+                YYY
             </label>
             <button type='submit' onClick={() => {
-                getData()
             }}>GET
             </button>
         </form>
