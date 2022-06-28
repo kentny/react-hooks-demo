@@ -16,11 +16,11 @@ function App() {
     }
 
     const createHeader =  () => {
-        if (dataChunk === undefined || dataChunk.data.length == 0) {
+        if (dataChunk === undefined || dataChunk.data.length === 0) {
             return <></>
         }
 
-        if (dataChunk.type == 'album') {
+        if (dataChunk.type === 'album') {
             return <>
                 <th>ID</th>
                 <th>UserID</th>
@@ -28,7 +28,7 @@ function App() {
             </>
         }
 
-        if (dataChunk.type == 'todo') {
+        if (dataChunk.type === 'todo') {
             return <>
                 <th>ID</th>
                 <th>UserID</th>
@@ -40,11 +40,11 @@ function App() {
     }
 
     const createBody = () => {
-        if (dataChunk === undefined || dataChunk.data.length == 0) {
+        if (dataChunk === undefined || dataChunk.data.length === 0) {
             return <></>
         }
 
-        if (dataChunk.type == 'album') {
+        if (dataChunk.type === 'album') {
             return dataChunk.data.map((_data, index) => {
                 const album = _data as Album
                 return <tr key={index}>
@@ -55,7 +55,7 @@ function App() {
             })
         }
 
-        if (dataChunk.type == 'todo') {
+        if (dataChunk.type === 'todo') {
             return dataChunk.data.map((_data, index) => {
                 const todo = _data as Todo
                 return <tr key={index}>
@@ -72,7 +72,7 @@ function App() {
 
     return (
         <div className="App">
-            <TypeSelectorForm {...{title: "Select A Type", repo: repo, onReceiveData: onReceiveData}}/>
+            <TypeSelectorForm {...{title: "GET DATA", repo: repo, onReceiveData: onReceiveData}}/>
             <table>
                 <thead>
                 <tr>
