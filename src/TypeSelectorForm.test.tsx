@@ -5,6 +5,9 @@ import {DataRepository} from "./repository/DataRepository";
 import {Todo} from "./entity/Todo";
 import {Album} from "./entity/Album";
 
+class SpyDataRepository implements DataRepository {
+}
+
 describe('Check input form.', () => {
 
     beforeEach(() => {
@@ -13,7 +16,13 @@ describe('Check input form.', () => {
     test('There is a title in input form.', () => {
     })
 
-    test('There are 2 radio buttons and 1 get button in input form.', () => {
+    test('There are a radio button with an ALBUM label.', () => {
+    })
+
+    test('There are a radio button with a TODO label.', () => {
+    })
+
+    test('There are a button with a GET label.', () => {
     })
 
     test('Call get albums api.', () => {
